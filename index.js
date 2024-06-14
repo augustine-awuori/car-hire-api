@@ -2,14 +2,14 @@ const express = require("express");
 const app = express();
 
 const logging = require("./startup/logging");
-// const routes = require("./startup/routes");
+const routes = require("./startup/routes.js/index.js");
 const db = require("./startup/db");
 const config = require("./startup/config.js");
 const prod = require("./startup/prod");
 
 config();
 logging();
-// routes(app);
+routes(app);
 db();
 prod(app);
 
