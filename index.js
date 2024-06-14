@@ -3,13 +3,13 @@ const app = express();
 
 const logging = require("./startup/logging");
 // const routes = require("./startup/routes");
-// const db = require("./startup/db");
+const db = require("./startup/db");
 // const config = require("./startup/config");
 // const prod = require("./startup/prod");
 
 logging();
 // routes(app);
-// db();
+db();
 // config();
 // prod(app);
 
