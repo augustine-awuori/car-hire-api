@@ -8,7 +8,7 @@ const validator = require("../middlewares/validate");
 
 router.post("/", validator(validateUser), async (req, res) => {
   const { email, name, password } = req.body;
-  let user = await service.findOne({ email });
+  let user = await User.findOne({ email });
 
   if (user) return res.status(400).send({ error: "Email is already taken" });
 
