@@ -16,6 +16,11 @@ const schema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   model: {
     type: String,
     trim: true,
@@ -54,6 +59,7 @@ const validateCar = (car) =>
     mileage: Joi.string().required(),
     model: Joi.string().required(),
     plate: Joi.string().required(),
+    name: Joi.string().required(),
     type: Joi.string().required(),
     year: Joi.number().required(),
     images: Joi.array().min(1),

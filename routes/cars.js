@@ -6,10 +6,11 @@ const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
 
 router.post("/", [auth, validator(validateCar)], async (req, res) => {
-  const { fuel, mileage, model, plate, selfDrive, type, year, images } =
+  const { name, fuel, mileage, model, plate, selfDrive, type, year, images } =
     req.body;
 
   const car = new Car({
+    name,
     fuel,
     lessee: req.user._id,
     mileage,
