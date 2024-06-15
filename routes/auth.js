@@ -34,7 +34,7 @@ router.get("/token", auth, async (req, res) => {
 function validate(req) {
   return Joi.object({
     password: Joi.string().min(5).max(1024).required(),
-    username: Joi.string().min(3).max(50).required(),
+    email: Joi.string().min(3).max(100).required(),
   }).validate(req);
 }
 
