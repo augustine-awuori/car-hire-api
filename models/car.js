@@ -53,7 +53,6 @@ const validateCar = (car) =>
     fuel: Joi.string().required(),
     mileage: Joi.string().required(),
     model: Joi.string().required(),
-    lessee: Joi.string().required(),
     plate: Joi.string().required(),
     type: Joi.string().required(),
     year: Joi.number().required(),
