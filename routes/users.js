@@ -7,12 +7,12 @@ const { User, validateUser } = require("../models/user");
 const validator = require("../middlewares/validate");
 
 router.post("/", validator(validateUser), async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, name, password, phone } = req.body;
   let user = await User.findOne({ email });
 
   if (user) return res.status(400).send({ error: "Email is already taken" });
 
-  user = new User({ name, email, password });
+  user = new User({ name, email, password, phone });
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();

@@ -7,6 +7,13 @@ const schema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  phone: {
+    type: String,
+    trim: true,
+    minlength: 7,
+    maxlength: 14,
+    required: true,
+  },
   name: {
     type: String,
     trim: true,
@@ -42,6 +49,7 @@ const validateUser = (user) =>
   Joi.object({
     email: Joi.string().min(3).max(100).required(),
     name: Joi.string().min(3).max(50).required(),
+    phone: Joi.string().min(7).max(14).required(),
     password: Joi.string().min(6).max(1024).required(),
   }).validate(user);
 
