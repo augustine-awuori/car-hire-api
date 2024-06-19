@@ -28,6 +28,9 @@ const schema = new mongoose.Schema({
     maxlength: 1024,
     trim: true,
   },
+  kra: String,
+  backId: String,
+  frontId: String,
   timestamp: {
     type: Number,
     default: function () {

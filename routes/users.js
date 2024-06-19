@@ -29,4 +29,14 @@ router.get("/", async (_req, res) => {
   res.send(users);
 });
 
+router.patch("/", auth, async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.user._id, req.body, {
+    new: true,
+  });
+
+  if (user) return res.send(user);
+
+  res.status(404).send({ error: "You don't exist in our database" });
+});
+
 module.exports = router;
