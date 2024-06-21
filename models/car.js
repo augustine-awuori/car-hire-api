@@ -48,6 +48,9 @@ const schema = new mongoose.Schema({
     type: Number,
   },
   images: [String],
+  license: String,
+  logBook: String,
+  saleAgreement: String,
 });
 
 const Car = mongoose.model("Car", schema);

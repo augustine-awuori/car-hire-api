@@ -4,6 +4,7 @@ const router = express.Router();
 const _ = require("lodash");
 
 const { User, validateUser } = require("../models/user");
+const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
 
 router.post("/", validator(validateUser), async (req, res) => {
