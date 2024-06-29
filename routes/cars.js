@@ -34,6 +34,18 @@ router.get("/", async (_req, res) => {
   res.send(cars);
 });
 
+router.get("/:carId", async (req, res) => {
+  const carId = req.params.carId;
+
+  if (!mongoose.isValidObjectId(carId))
+    return res.status(400).send({ error: 'Invalid car id' });
+
+  const car = await Car.findById(carId);
+  if (!car) return res.status(404).send({ error: "The car with the given id doesn't exist" })
+
+  res.send(await car.populate('lessee'));
+});
+
 router.patch("/:carId", auth, async (req, res) => {
   const carId = req.params.carId;
 
