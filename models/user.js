@@ -31,6 +31,10 @@ const schema = new mongoose.Schema({
   kra: String,
   backId: String,
   frontId: String,
+  isProfileComplete: {
+    type: Boolean,
+    default: false
+  },
   timestamp: {
     type: Number,
     default: function () {
