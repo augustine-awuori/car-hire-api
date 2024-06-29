@@ -14,6 +14,7 @@ const schema = new mongoose.Schema({
     maxlength: 14,
     required: true,
   },
+  photo: String,
   name: {
     type: String,
     trim: true,
