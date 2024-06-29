@@ -43,7 +43,7 @@ router.get("/:carId", async (req, res) => {
   const car = await Car.findById(carId);
   if (!car) return res.status(404).send({ error: "The car with the given id doesn't exist" })
 
-  res.send(await car.populate('lessee'));
+  res.send(await car.populate('lessee', "-password"));
 });
 
 router.patch("/:carId", auth, async (req, res) => {
@@ -62,7 +62,7 @@ router.patch("/:carId", auth, async (req, res) => {
     return res.status(403).send({ error: "This isn't your car" });
 
   car = await Car.findByIdAndUpdate(carId, req.body, { new: true }).populate(
-    "lessee"
+    "lessee", "-password"
   );
   res.send(car);
 });
