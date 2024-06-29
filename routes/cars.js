@@ -12,13 +12,13 @@ router.post("/", [auth, validator(validateCar)], async (req, res) => {
 
   await car.save();
 
-  res.send(await populateAndProject(car));
+  res.send(car);
 });
 
 router.get("/", async (_req, res) => {
   const cars = await Car.find({});
 
-  res.send(cars.map(async car => await populateAndProject(car)));
+  res.send(cars);
 });
 
 router.get("/:carId", async (req, res) => {
