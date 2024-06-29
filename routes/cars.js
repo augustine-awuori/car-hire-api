@@ -34,7 +34,7 @@ router.get("/", async (_req, res) => {
   res.send(cars);
 });
 
-router.patch("/carId:", auth, async (req, res) => {
+router.patch("/:carId", auth, async (req, res) => {
   const carId = req.params.carId;
 
   if (!mongoose.isValidObjectId(carId))
