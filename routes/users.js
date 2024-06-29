@@ -6,6 +6,7 @@ const _ = require("lodash");
 const { User, validateUser } = require("../models/user");
 const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
+const { default: mongoose } = require("mongoose");
 
 router.post("/", validator(validateUser), async (req, res) => {
   const { email, name, password, phone } = req.body;
@@ -22,6 +23,21 @@ router.post("/", validator(validateUser), async (req, res) => {
     .header("x-auth-token", user.generateAuthToken())
     .header("access-control-expose-headers", "x-auth-token")
     .send(_.pick(user, ["_id", "name", "email"]));
+});
+
+router.get("/:userId", auth, async (req, res) => {
+  const userId = req.params.userId;
+  if (req.user._id.toString() !== userId.toString())
+    return res.status(403).send({ error: "You're not authorised to access this account" })
+
+  if (!mongoose.isValidObjectId(userId))
+    return res.status(400).send({ error: 'Invalid user id' })
+
+  const user = await User.findById(req.user._id);
+  if (!user)
+    return res.status(404).send({ error: "User doesn't exist in the database" })
+
+  res.send(_.omit(user, 'password'));
 });
 
 router.get("/", async (_req, res) => {
