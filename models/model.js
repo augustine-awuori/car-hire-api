@@ -23,5 +23,5 @@ const validate = (model) =>
         type: Joi.string().required()
     }).validate(model);
 
-exports.Type = Model;
+exports.Model = Model;
 exports.validate = validate;
