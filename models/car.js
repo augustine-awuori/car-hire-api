@@ -21,11 +21,6 @@ const schema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  model: {
-    type: String,
-    trim: true,
-    required: true,
-  },
   lessee: {
     required: true,
     type: mongoose.Types.ObjectId,
@@ -38,8 +33,8 @@ const schema = new mongoose.Schema({
     minlength: 7,
     trim: true,
   },
-  model: {
-    ref: 'Model',
+  type: {
+    ref: 'Type',
     required: true,
     type: mongoose.Types.ObjectId,
   },
@@ -60,7 +55,7 @@ const validateCar = (car) =>
     selfDrive: Joi.boolean().required(),
     fuel: Joi.string().required(),
     mileage: Joi.string().required(),
-    model: Joi.string().required(),
+    type: Joi.string().required(),
     plate: Joi.string().required(),
     name: Joi.string().required(),
     type: Joi.string().required(),
