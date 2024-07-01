@@ -39,9 +39,9 @@ const schema = new mongoose.Schema({
     trim: true,
   },
   type: {
+    ref: 'Type',
     required: true,
-    type: String,
-    trim: true,
+    type: mongoose.Types.ObjectId,
   },
   year: {
     required: true,

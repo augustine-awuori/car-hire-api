@@ -1,4 +1,11 @@
+const mongoose = require("mongoose");
 
-const populateAndProject = (query) => query.populate("lessee", "-password");
+const populateAndProject = (query) =>
+    query.populate("lessee", "-password").populate("type");
 
-module.exports = { populateAndProject }
+const findById = (id) => {
+    if (!mongoose.isValidObjectId(id))
+        return
+}
+
+module.exports = { findById, populateAndProject }

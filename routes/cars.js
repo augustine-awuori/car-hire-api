@@ -16,7 +16,7 @@ router.post("/", [auth, validator(validateCar)], async (req, res) => {
 });
 
 router.get("/", async (_req, res) => {
-  const cars = await Car.find({});
+  const cars = await populateAndProject(await Car.find({}).sort('-_id'));
 
   res.send(cars);
 });
