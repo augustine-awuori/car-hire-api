@@ -10,4 +10,15 @@ const findById = async (id) => {
         return await populateAndProject(Car.findById(id));
 }
 
-module.exports = { findById, populateAndProject }
+const getAll = async (filter = {}) =>
+    await populateAndProject(Car.find(filter).sort("-_id"));
+
+const findByIdAndUpdate = async (id, update, options) => {
+    if (!mongoose.isValidObjectId(id)) return;
+
+    return await populateAndProject(
+        Car.findByIdAndUpdate(id, update, options)
+    );
+};
+
+module.exports = { findById, findByIdAndUpdate, getAll, populateAndProject }
