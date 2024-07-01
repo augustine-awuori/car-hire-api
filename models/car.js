@@ -46,21 +46,26 @@ const schema = new mongoose.Schema({
   license: String,
   logBook: String,
   saleAgreement: String,
+  withDriver: {
+    default: false,
+    type: Boolean
+  }
 });
 
 const Car = mongoose.model("Car", schema);
 
 const validateCar = (car) =>
   Joi.object({
-    selfDrive: Joi.boolean().required(),
     fuel: Joi.string().required(),
-    mileage: Joi.string().required(),
-    type: Joi.string().required(),
-    plate: Joi.string().required(),
-    name: Joi.string().required(),
-    type: Joi.string().required(),
-    year: Joi.number().required(),
     images: Joi.array().min(1),
+    mileage: Joi.string().required(),
+    name: Joi.string().required(),
+    plate: Joi.string().required(),
+    selfDrive: Joi.boolean().required(),
+    type: Joi.string().required(),
+    type: Joi.string().required(),
+    withDriver: Joi.boolean().required(),
+    year: Joi.number().required(),
   }).validate(car);
 
 exports.Car = Car;
