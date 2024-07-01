@@ -9,8 +9,7 @@ const findById = async (id) => {
         return await populateAndProject(Model.findById(id));
 }
 
-const getAll = async (filter = {}) =>
-    await populateAndProject(Model.find(filter).sort("-_id"));
+const getAll = async (filter = {}) => await populateAndProject(Model.find(filter));
 
 const findByIdAndUpdate = async (id, update, options) => {
     if (mongoose.isValidObjectId(id))
