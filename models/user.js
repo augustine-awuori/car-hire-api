@@ -36,6 +36,10 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
   timestamp: {
     type: Number,
     default: function () {
