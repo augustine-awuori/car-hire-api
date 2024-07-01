@@ -38,8 +38,8 @@ const schema = new mongoose.Schema({
     minlength: 7,
     trim: true,
   },
-  type: {
-    ref: 'Type',
+  model: {
+    ref: 'Model',
     required: true,
     type: mongoose.Types.ObjectId,
   },

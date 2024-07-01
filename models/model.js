@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const Type = mongoose.model("Type", new mongoose.Schema({
+const Model = mongoose.model("Model", new mongoose.Schema({
     label: {
         max: 50,
         min: 3,
@@ -12,10 +12,10 @@ const Type = mongoose.model("Type", new mongoose.Schema({
     }
 }));
 
-const validate = (type) =>
+const validate = (model) =>
     Joi.object({
         label: Joi.string().min(3).max(50).required(),
-    }).validate(type);
+    }).validate(model);
 
-exports.Type = Type;
+exports.Model = Model;
 exports.validate = validate;
