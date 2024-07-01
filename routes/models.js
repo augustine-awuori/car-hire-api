@@ -17,7 +17,7 @@ router.post("/", [auth, admin, validatingWith(validate)], async (req, res) => {
 
 router.get("/", async (_req, res) => {
     const models = await service.getAll();
-
+    console.log("models", models)
     res.send(models);
 });
 
