@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const { Car, validateCar } = require("../models/car");
-const { populateAndProject } = require('../services/cars');
+const { findById, populateAndProject } = require('../services/cars');
 const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
 
@@ -12,7 +12,7 @@ router.post("/", [auth, validator(validateCar)], async (req, res) => {
 
   await car.save();
 
-  res.send(car);
+  res.send(await findById(car._id));
 });
 
 router.get("/", async (_req, res) => {
