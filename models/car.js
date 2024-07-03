@@ -46,6 +46,7 @@ const schema = new mongoose.Schema({
   license: String,
   logBook: String,
   saleAgreement: String,
+  location: String,
   withDriver: {
     default: false,
     type: Boolean
@@ -62,7 +63,8 @@ const validateCar = (car) =>
     name: Joi.string().required(),
     plate: Joi.string().required(),
     selfDrive: Joi.boolean().required(),
-    type: Joi.string().required(),
+    location: Joi.string().required(),
+    model: Joi.string().required(),
     type: Joi.string().required(),
     withDriver: Joi.boolean().required(),
     year: Joi.number().required(),
