@@ -16,4 +16,4 @@ const findByIdAndUpdate = async (id, update, options) => {
     return await User.findByIdAndUpdate(id, update, options);
 };
 
-module.exports = { findById, findByIdAndUpdate, getAll, populateAndProject }
+module.exports = { findById, findByIdAndUpdate, getAll, }
