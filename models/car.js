@@ -38,6 +38,11 @@ const schema = new mongoose.Schema({
     required: true,
     type: mongoose.Types.ObjectId,
   },
+  model: {
+    ref: 'Model',
+    required: true,
+    type: mongoose.Types.ObjectId,
+  },
   year: {
     required: true,
     type: Number,
