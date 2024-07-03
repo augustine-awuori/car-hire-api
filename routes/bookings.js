@@ -42,9 +42,9 @@ router.get('/:id', auth, async (req, res) => {
         user._id.toString() === booking.booker._id.toString()
         || user.isAdmin;
 
-    if (isAuthorised) return res.send(booking);
-
-    res.status(403).send({ error: "You're not authorised for this booking info" });
+    (isAuthorised)
+        ? res.send(booking)
+        : res.status(403).send({ error: "You're not authorised for this booking info" });
 });
 
 module.exports = router;
