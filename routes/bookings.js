@@ -21,7 +21,13 @@ router.get('/', [auth, admin], async (_req, res) => {
     const bookings = await service.getAll();
 
     res.send(bookings);
-})
+});
+
+router.get('/my', auth, async (req, res) => {
+    const myBookings = await service.getAll({ booker: req.user._id });
+
+    res.send(myBookings);
+});
 
 router.get('/:id', auth, async (req, res) => {
     const bookingId = req.params.id;
