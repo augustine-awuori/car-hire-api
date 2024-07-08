@@ -29,7 +29,6 @@ const schema = new mongoose.Schema({
   },
   type: {
     ref: 'Type',
-    required: true,
     type: mongoose.Types.ObjectId,
   },
   model: {
@@ -72,7 +71,6 @@ const validateCar = (car) =>
     selfDrive: Joi.boolean().required(),
     location: Joi.string().required(),
     model: Joi.string().required(),
-    type: Joi.string().required(),
     withDriver: Joi.boolean().required(),
     year: Joi.number().required(),
   }).validate(car);
