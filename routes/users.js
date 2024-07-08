@@ -1,20 +1,18 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const mongoose = require("mongoose");
 const _ = require("lodash");
 
 const { User, validateUser } = require("../models/user");
 const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
-const { default: mongoose } = require("mongoose");
 
 router.post("/", validator(validateUser), async (req, res) => {
-  const { email, name, password, phone } = req.body;
-  let user = await User.findOne({ email });
-
+  let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send({ error: "Email is already taken" });
 
-  user = new User({ name, email, password, phone });
+  user = new User(req.body);
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();

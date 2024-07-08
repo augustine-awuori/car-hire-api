@@ -40,6 +40,10 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  id: {
+    type: Number,
+    required: true
+  },
   timestamp: {
     type: Number,
     default: function () {
@@ -63,6 +67,7 @@ const validateUser = (user) =>
     name: Joi.string().min(3).max(50).required(),
     phone: Joi.string().min(7).max(14).required(),
     password: Joi.string().min(6).max(1024).required(),
+    id: Joi.number().max(13).required()
   }).validate(user);
 
 exports.User = User;
