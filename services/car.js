@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Car } = require("../models/car");
 
 const populateAndProject = (query) =>
-    query.populate("lessee", "-password").populate("type");
+    query.populate("lessee", "-password").populate("model");
 
 const findById = async (id) => {
     if (mongoose.isValidObjectId(id))
