@@ -6,14 +6,8 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  fuel: {
-    type: String,
-    trim: true,
-    required: true,
-  },
   mileage: {
     type: String,
-    required: true,
     trim: true,
   },
   name: {
@@ -60,16 +54,19 @@ const schema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  cc: {
+    type: Number,
+    required: true
+  },
 });
 
 const Car = mongoose.model("Car", schema);
 
 const validateCar = (car) =>
   Joi.object({
+    cc: Joi.number().required(),
     count: Joi.number().required(),
-    fuel: Joi.string().required(),
     images: Joi.array().min(1),
-    mileage: Joi.string().required(),
     name: Joi.string().required(),
     plate: Joi.string().required(),
     selfDrive: Joi.boolean().required(),
