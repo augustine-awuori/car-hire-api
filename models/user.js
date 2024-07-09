@@ -53,7 +53,8 @@ const schema = new mongoose.Schema({
   kraPin: {
     type: String,
     required: true
-  }
+  },
+  bookedCars: Object
 });
 
 schema.methods.generateAuthToken = function () {

@@ -15,6 +15,11 @@ router.post('/', [auth, validator(validateBooking)], async (req, res) => {
     await booking.save();
 
     res.send(await service.findById(booking._id));
+
+    const booker = await userService.findById(req.user._id);
+    const car = req.body.car;
+    const bookedCars = { ...(booker.bookedCars || {}), [car]: car };
+    userService.findByIdAndUpdate(booker._id, { bookedCars });
 });
 
 router.get('/', [auth, admin], async (_req, res) => {
