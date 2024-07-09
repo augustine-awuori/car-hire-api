@@ -25,6 +25,13 @@ router.post('/', [auth, validator(validateBooking)], async (req, res) => {
 router.get('/', [auth, admin], async (_req, res) => {
     const bookings = await service.getAll();
 
+    bookings.forEach(async booking => {
+        if (!booking.booker?.bookedCars[booking.car._id]) {
+            const bookedCars = { ...(booking.booker.bookedCars || {}), [booking.car._id]: booking.car._id };
+            await userService.findByIdAndUpdate(booking.booker._id, { bookedCars })
+        }
+    });
+
     res.send(bookings);
 });
 
