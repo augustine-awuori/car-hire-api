@@ -50,6 +50,10 @@ const schema = new mongoose.Schema({
       return this._id.getTimestamp();
     },
   },
+  kraPin: {
+    type: String,
+    required: true
+  }
 });
 
 schema.methods.generateAuthToken = function () {
@@ -64,10 +68,11 @@ const User = mongoose.model("User", schema);
 const validateUser = (user) =>
   Joi.object({
     email: Joi.string().min(3).max(100).required(),
+    id: Joi.string().max(13).required(),
+    kraPin: Joi.string().required(),
     name: Joi.string().min(3).max(50).required(),
-    phone: Joi.string().min(7).max(14).required(),
     password: Joi.string().min(6).max(1024).required(),
-    id: Joi.string().max(13).required()
+    phone: Joi.string().min(7).max(14).required(),
   }).validate(user);
 
 exports.User = User;
