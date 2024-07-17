@@ -57,6 +57,11 @@ const schema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  approved: {
+    type: Boolean,
+    default: false
+  },
+  approvedBy: { type: mongoose.Types.ObjectId, ref: 'User' }
 });
 
 const Car = mongoose.model("Car", schema);

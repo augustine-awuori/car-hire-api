@@ -48,7 +48,10 @@ router.patch("/:carId", auth, async (req, res) => {
   if (req.user._id.toString() !== car.lessee.toString())
     return res.status(403).send({ error: "This isn't your car" });
 
-  res.send(await service.findByIdAndUpdate(carId, req.body, { new: true }));
+  const data = { ...req.body };
+  if (data.approved) data.approvedBy = req.user._id;
+
+  res.send(await service.findByIdAndUpdate(carId, data, { new: true }));
 });
 
 module.exports = router;
