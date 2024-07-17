@@ -31,7 +31,7 @@ router.get("/:userId", auth, async (req, res) => {
   if (!mongoose.isValidObjectId(userId))
     return res.status(400).send({ error: 'Invalid user id' })
 
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(userId);
   if (!user)
     return res.status(404).send({ error: "User doesn't exist in the database" })
 
