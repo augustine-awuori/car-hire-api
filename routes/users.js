@@ -25,7 +25,7 @@ router.post("/", validator(validateUser), async (req, res) => {
 
 router.get("/:userId", auth, async (req, res) => {
   const userId = req.params.userId;
-  if (req.user._id.toString() !== userId.toString())
+  if (req.user._id.toString() !== userId.toString() && !req.user.isAdmin)
     return res.status(403).send({ error: "You're not authorised to access this account" })
 
   if (!mongoose.isValidObjectId(userId))
