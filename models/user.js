@@ -36,29 +36,18 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  isAdmin: {
-    type: Boolean,
-    default: false
-  },
-  id: {
-    type: String,
-    required: true
-  },
+  isAdmin: { type: Boolean, default: false },
+  id: { type: String, required: true },
   timestamp: {
     type: Number,
     default: function () {
       return this._id.getTimestamp();
     },
   },
-  kraPin: {
-    type: String,
-    required: true
-  },
+  kraPin: { type: String, required: true },
   bookedCars: Object,
-  approved: {
-    type: Boolean,
-    default: false
-  }
+  approved: { type: Boolean, default: false },
+  approvedBy: { type: mongoose.Types.ObjectId, ref: 'User' }
 });
 
 schema.methods.generateAuthToken = function () {

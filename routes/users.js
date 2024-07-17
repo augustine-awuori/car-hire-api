@@ -45,13 +45,17 @@ router.get("/", async (_req, res) => {
 });
 
 router.patch("/", auth, async (req, res) => {
-  const user = await User.findByIdAndUpdate(req.user._id, req.body, {
-    new: true,
-  });
+  const user = await User.findById(req.user._id);
+  if (!user) return res.status(404).send({ error: "User don't exist in our database" });
 
-  if (user) return res.send(user);
+  if (user._id.toString() !== req.user._id && !req.user.isAdmin)
+    return res.status(403).send({ error: 'You are not authorised for this operation' });
 
-  res.status(404).send({ error: "You don't exist in our database" });
+  const data = { ...req.body };
+  if (data.approved) data.approvedBy = req.user._id;
+
+  const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true });
+  res.send(updatedUser);
 });
 
 module.exports = router;
