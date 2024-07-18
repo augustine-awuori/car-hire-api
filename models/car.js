@@ -61,7 +61,11 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  approvedBy: { type: mongoose.Types.ObjectId, ref: 'User' }
+  approvedBy: { type: mongoose.Types.ObjectId, ref: 'User' },
+  boughtOnHirePurchase: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const Car = mongoose.model("Car", schema);
