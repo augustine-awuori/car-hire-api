@@ -45,7 +45,7 @@ router.patch("/:carId", auth, async (req, res) => {
       .status(404)
       .send({ error: "The car with the given Id doesn't exist" });
 
-  if (req.user._id.toString() !== car.lessee.toString())
+  if (req.user._id.toString() !== car.lessee.toString() && !req.user.isAdmin)
     return res.status(403).send({ error: "This isn't your car" });
 
   const data = { ...req.body };
