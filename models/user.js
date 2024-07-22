@@ -47,6 +47,7 @@ const schema = new mongoose.Schema({
   kraPin: { type: String, required: true },
   bookedCars: Object,
   approved: { type: Boolean, default: false },
+  blocked: { type: Boolean, default: false },
   approvedBy: { type: mongoose.Types.ObjectId, ref: 'User' }
 });
 
