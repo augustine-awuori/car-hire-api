@@ -51,7 +51,7 @@ const schema = new mongoose.Schema({
   },
   count: {
     type: Number,
-    required: true
+    default: 1
   },
   cc: {
     type: Number,
@@ -73,14 +73,11 @@ const Car = mongoose.model("Car", schema);
 const validateCar = (car) =>
   Joi.object({
     cc: Joi.number().required(),
-    count: Joi.number().required(),
     images: Joi.array().min(1),
     name: Joi.string().required(),
     plate: Joi.string().required(),
     selfDrive: Joi.boolean().required(),
-    location: Joi.string().required(),
     model: Joi.string().required(),
-    withDriver: Joi.boolean().required(),
     year: Joi.number().required(),
   }).validate(car);
 
