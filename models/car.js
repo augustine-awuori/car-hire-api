@@ -2,7 +2,10 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  dailyRentalPrice: Number,
+  dailyRentalPrice: {
+    type: Number,
+    required: true
+  },
   selfDrive: {
     type: Boolean,
     required: true,
@@ -74,6 +77,7 @@ const Car = mongoose.model("Car", schema);
 const validateCar = (car) =>
   Joi.object({
     cc: Joi.number().required(),
+    dailyRentalPrice: Joi.number().required(),
     images: Joi.array().min(1),
     name: Joi.string().required(),
     plate: Joi.string().required(),
